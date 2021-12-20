@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/b6c497e1f7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="loginform.css">
+</head>
+<body>
+    <div class="container">
+        <div class="formContent">
+            <h1 class="heading">Regitration Form</h1>
+            <form action="" class="form" >
+                <label for="name" class="nameText">Name:-</label><br>
+                <input type="text" class="name" id="name" required><br>
+                <label for="lastName" class="LastnameText" id="LastNameText">Last Name:-</label><br>
+                <input type="text" class="lastName" id="lastName"><br>
+                <label for="" class="emailText" id="emailText">Email-Id</label><br>
+                <input type="email" class="email" id="email" required>
+                <label for="userName" class="userText" id="userText">User Name:-</label><br>
+                <input type="text" class="username" id="username" required>
+                <i class="fas fa-user userIcon" id="userIcon"></i><br>
+                <label for="password" class="passwordText" id="passwordText">Password:-</label><br>
+                <input type="password" class="password" id="password" required>
+                <i class="fas fa-lock passwordIcon" id="passwordIcon"></i><br>
+                <input type="submit" class="submit" id="submit">
+            </form>
+        </div>
+        <div class="casess hidden" id="casess">
+            <ul>
+                <li class="invalid" class="length" id="length"><i class="fas fa-times"></i>The password should have min 8 characters</li>
+                <li class="invalid" class="uppercase" id="uppercase"><i class="fas fa-times"></i>The password should have min one upper case characters</li>
+                <li class="invalid" class="special" id="special"><i class="fas fa-times"></i>The password should have min one special characters</li>
+                <li class="invalid" class="number" id="number"><i class="fas fa-times"></i>The password should have min one number</li>
+            </ul>    
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    let input=document.getElementById("password");
+    let lock=document.getElementById("passwordIcon");
+    let mail=document.getElementById("email");
+    input.addEventListener("focus",visible);
+    input.addEventListener("blur",hidden);
+    input.addEventListener("keyup",validate);
+    lock.addEventListener("click",showpass);
+    mail.addEventListener("change",emailValidation);
+   
+
+
+    
+    function validate(){
+        let pass=input.value;
+        // let  count=0;
+        if(pass.length>=8){
+            document.getElementById("length").classList.remove("invalid");
+            document.getElementById("length").classList.add("valid");
+            document.getElementById("length").firstChild.classList.add("fa-check");
+            document.getElementById("length").firstChild.classList.remove("fa-times");
+        }else{
+            document.getElementById("length").classList.add("invalid");
+            document.getElementById("length").classList.remove("valid");
+            document.getElementById("length").firstChild.classList.remove("fa-check");
+            document.getElementById("length").firstChild.classList.add("fa-times");
+            
+        }
+
+
+
+        if(pass.match(/[A-Z]/)){
+            document.getElementById("uppercase").classList.remove("invalid");
+            document.getElementById("uppercase").classList.add("valid");
+            document.getElementById("uppercase").firstChild.classList.add("fa-check");
+            document.getElementById("uppercase").firstChild.classList.remove("fa-times");
+        }else{
+            document.getElementById("uppercase").classList.add("invalid");
+            document.getElementById("uppercase").classList.remove("valid");
+            document.getElementById("uppercase").firstChild.classList.remove("fa-check");
+            document.getElementById("uppercase").firstChild.classList.add("fa-times");
+            
+        }
+
+        if(pass.match(/[!-\/:-@[-`{-~]/)){
+            document.getElementById("special").classList.remove("invalid");
+            document.getElementById("special").classList.add("valid");
+            document.getElementById("special").firstChild.classList.add("fa-check");
+            document.getElementById("special").firstChild.classList.remove("fa-times");
+        }else{
+            document.getElementById("special").classList.add("invalid");
+            document.getElementById("special").classList.remove("valid");
+            document.getElementById("special").firstChild.classList.remove("fa-check");
+            document.getElementById("special").firstChild.classList.add("fa-times");
+            
+        }
+
+        if(pass.match(/[0-9]/)){
+            document.getElementById("number").classList.remove("invalid");
+            document.getElementById("number").classList.add("valid");
+            document.getElementById("number").firstChild.classList.add("fa-check");
+            document.getElementById("number").firstChild.classList.remove("fa-times");
+        }else{
+            document.getElementById("number").classList.add("invalid");
+            document.getElementById("number").classList.remove("valid");
+            document.getElementById("number").firstChild.classList.remove("fa-check");
+            document.getElementById("number").firstChild.classList.add("fa-times");
+            
+        }
+    }
+
+    function showpass(){
+        if(document.getElementById("password").type=="password"){
+            document.getElementById("password").type="text";
+            document.getElementById("passwordIcon").classList.remove("fa-lock");
+            document.getElementById("passwordIcon").classList.add("fa-unlock");
+        }else{
+            document.getElementById("password").type="password";
+            document.getElementById("passwordIcon").classList.add("fa-lock");
+            document.getElementById("passwordIcon").classList.remove("fa-unlock");
+        }
+    }
+
+    function emailValidation(){
+        let email=mail.value;
+        if(!email.match(/[A-z0-9]@gmail.com/)){
+            alert("invalid Email");
+            return false;
+        }
+    }
+    function visible(){
+        document.getElementById("casess").classList.remove("hidden");
+    }
+    function hidden(){
+        document.getElementById("casess").classList.add("hidden");
+    }
+</script>
